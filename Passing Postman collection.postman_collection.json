@@ -15,7 +15,7 @@
 						"id": "15b402b4-b212-4be2-99a5-314f1b1e98b7",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(201);",
+							"    pm.response.to.have.status(200);",
 							"});",
 							"",
 							"let jsonData = pm.response.json();",
@@ -28,17 +28,25 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "47ff1a7c-6a27-44c4-925a-8b1c8518fcbf",
+						"exec": [
+							"console.log('${pm.info.requestName} - From the pre-request script');"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://httpbin.org/get?isGood=true&isBad=false",
-					"protocol": "http",
+					"raw": "{{url}}/get?isGood=true&isBad=false",
 					"host": [
-						"httpbin",
-						"org"
+						"{{url}}"
 					],
 					"path": [
 						"get"
